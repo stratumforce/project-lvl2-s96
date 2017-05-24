@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import startDiff from '../index';
+import startDiff from '..';
 
 startDiff();
