@@ -9,7 +9,7 @@ export default(firstConfig, secondConfig) => {
 
   const setOfKeys = _.union(Object.keys(firstConfigContent), Object.keys(secondConfigContent));
 
-  const output = setOfKeys.reduce((acc, item) => {
+  const diffResult = setOfKeys.reduce((acc, item) => {
     if (item in firstConfigContent && item in secondConfigContent) {
       if (firstConfigContent[item] === secondConfigContent[item]) {
         return acc.concat(`    ${item}: ${firstConfigContent[item]}`);
@@ -22,5 +22,5 @@ export default(firstConfig, secondConfig) => {
     return acc.concat(`  + ${item}: ${secondConfigContent[item]}`);
   }, []);
 
-  return `{\n${output.join('\n')}\n}`;
+  return `{\n${diffResult.join('\n')}\n}`;
 };
