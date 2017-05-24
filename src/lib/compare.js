@@ -1,7 +1,5 @@
-import fs from 'fs';
 import _ from 'lodash';
-
-const readConfig = config => JSON.parse(fs.readFileSync(config, 'utf-8'));
+import readConfig from './readconfig';
 
 export default(firstConfig, secondConfig) => {
   const firstConfigContent = readConfig(firstConfig);

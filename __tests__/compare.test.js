@@ -1,8 +1,8 @@
 import compare from '../src/lib/compare';
 
 test('Compare two files', () => {
-  const firstConfig = '__tests__/data/before.json';
-  const secondConfig = '__tests__/data/after.json';
+  const firstConfig = '__tests__/data/before.yml';
+  const secondConfig = '__tests__/data/after.yml';
   const expectedResult = `{
     host: hexlet.io
   + timeout: 20

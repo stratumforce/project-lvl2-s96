@@ -26,6 +26,7 @@
   "dependencies": {
     "commander": "*",
     "file-system": "*",
+    "js-yaml": "*",
     "lodash": "*"
   },
   "devDependencies": {
