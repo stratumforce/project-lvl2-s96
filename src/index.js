@@ -11,7 +11,3 @@ program
   .action((firstConfig, secondConfig) => compare(firstConfig, secondConfig));
 
 export default() => program.parse(process.argv);
-
-/* const runDiff = (firstConfig, secondConfig) => {
-
-}; */
