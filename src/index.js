@@ -1,3 +1,3 @@
-import gendiff from './lib/compare';
+import compare from './lib/compare';
 
-export default gendiff;
+export default compare;

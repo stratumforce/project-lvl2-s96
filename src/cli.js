@@ -1,5 +1,5 @@
 import commander from 'commander';
-import compare from './lib/compare';
+import compare from '.';
 
 const program = commander;
 
