@@ -11,5 +11,5 @@ lint:
 	npm run eslint -- src __tests__
 
 test:
-	npm test -- --watchAll
-	#npm test
+	#npm test -- --watchAll
+	npm test
