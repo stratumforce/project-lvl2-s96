@@ -40,5 +40,11 @@
     "eslint-config-airbnb-base": "*",
     "eslint-plugin-import": "*",
     "jest": "*"
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "node_modules",
+      "__fixtures__"
+    ]
   }
 }

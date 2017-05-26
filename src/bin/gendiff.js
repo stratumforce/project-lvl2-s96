@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-import startDiff from '..';
+import gendiff from '../cli';
 
-startDiff();
+gendiff();

@@ -1,4 +1,4 @@
-import compare from '../src/lib/compare';
+import compare from '../src/';
 
 const expectedResult = `{
     host: hexlet.io
@@ -8,8 +8,8 @@ const expectedResult = `{
   + verbose: true
 }`;
 
-const firstConfig = '__tests__/data/before';
-const secondConfig = '__tests__/data/after';
+const firstConfig = '__tests__/__fixtures__/before';
+const secondConfig = '__tests__/__fixtures__/after';
 
 test('Compare two JSON files', () => {
   expect(compare(`${firstConfig}.json`, `${secondConfig}.json`)).toBe(expectedResult);

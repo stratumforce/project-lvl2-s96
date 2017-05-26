@@ -8,8 +8,8 @@ publish:
 	npm publish
 
 lint:
-	npm run eslint -- src test
+	npm run eslint -- src __tests__
 
 test:
-	#npm test -- --watchAll
-	npm test
+	npm test -- --watchAll
+	#npm test
