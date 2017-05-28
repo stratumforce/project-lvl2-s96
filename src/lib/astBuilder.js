@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const buildNode = (key, type, beforeValue, afterValue, children) => {
+const buildNode = (key, type, beforeValue, afterValue, children = []) => {
   const newNode = { key, type, beforeValue, afterValue, children };
   return newNode;
 };
@@ -12,36 +12,27 @@ const genDiffAst = (firstConfigContent, secondConfigContent) => {
     if (key in firstConfigContent && key in secondConfigContent) {
       if (firstConfigContent[key] instanceof Object || secondConfigContent[key] instanceof Object) {
         return [...acc, buildNode(key, 'same', '', '',
-          genDiffAst(
-            typeof firstConfigContent[key] === 'undefined' ? {} : firstConfigContent[key],
-            typeof secondConfigContent[key] === 'undefined' ? {} : secondConfigContent[key]))];
+          genDiffAst(firstConfigContent[key], secondConfigContent[key]))];
       }
-      if (firstConfigContent[key] === secondConfigContent[key]) {
-        return [...acc, buildNode(key, 'same', firstConfigContent[key], secondConfigContent[key], [])];
+
+      if (JSON.stringify(firstConfigContent[key]) === JSON.stringify(secondConfigContent[key])) {
+        return [...acc, buildNode(key, 'same', firstConfigContent[key], secondConfigContent[key])];
       }
-      return [...acc, buildNode(key, 'changed', firstConfigContent[key], secondConfigContent[key], [])];
+
+      return [...acc, buildNode(key, 'changed', firstConfigContent[key], secondConfigContent[key])];
     }
 
-    // if key NOT in both configs
-    if (firstConfigContent[key] instanceof Object || secondConfigContent[key] instanceof Object) {
-      const type = key in firstConfigContent ? 'removed' : 'added';
-
-      return [...acc, buildNode(key, type, '', '',
-        genDiffAst(
-          typeof firstConfigContent[key] === 'undefined' ? {} : firstConfigContent[key],
-          typeof secondConfigContent[key] === 'undefined' ? {} : secondConfigContent[key]))];
+    if (key in firstConfigContent) {
+      const values = firstConfigContent[key] instanceof Object ?
+          ['removed', '', '', genDiffAst(firstConfigContent[key], firstConfigContent[key])] :
+          ['removed', firstConfigContent[key], ''];
+      return [...acc, buildNode(key, ...values)];
     }
 
-    // if some of objects equal '{}'
-    if (!Object.keys(firstConfigContent).length || !Object.keys(secondConfigContent).length) {
-      return [...acc, buildNode(key, 'same', key in firstConfigContent ? firstConfigContent[key] :
-        secondConfigContent[key], '', [])];
-    }
-
-    const values = (key in firstConfigContent) ?
-      ['removed', firstConfigContent[key], ''] :
-      ['added', '', secondConfigContent[key]];
-    return [...acc, buildNode(key, ...values, [])];
+    const values = secondConfigContent[key] instanceof Object ?
+        ['added', '', '', genDiffAst(secondConfigContent[key], secondConfigContent[key])] :
+        ['added', '', secondConfigContent[key]];
+    return [...acc, buildNode(key, ...values)];
   }, []);
 };
 
