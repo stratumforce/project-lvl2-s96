@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
-const objTypesSymbol = {
+const objTypesPrefix = {
   same: '  ',
   removed: '- ',
   added: '+ ',
 };
 
 const objTypesRender = {
-  same: item => `${objTypesSymbol.same}${item.key}: ${item.beforeValue}`,
+  same: item => `${objTypesPrefix.same}${item.key}: ${item.beforeValue}`,
   changed: (item, spaces) => [`${spaces}${objTypesRender.added(item)}`, `${spaces}${objTypesRender.removed(item)}`],
-  removed: item => `${objTypesSymbol.removed}${item.key}: ${item.beforeValue}`,
-  added: item => `${objTypesSymbol.added}${item.key}: ${item.afterValue}`,
+  removed: item => `${objTypesPrefix.removed}${item.key}: ${item.beforeValue}`,
+  added: item => `${objTypesPrefix.added}${item.key}: ${item.afterValue}`,
 };
 
 const renderAst = (ast, lvl = 1) =>
@@ -18,7 +18,7 @@ const renderAst = (ast, lvl = 1) =>
     const spaces = _.repeat(' ', 2 * lvl);
 
     if (item.children.length > 0) {
-      return acc.concat(`${spaces}${objTypesSymbol[item.type]}${item.key}: {`,
+      return acc.concat(`${spaces}${objTypesPrefix[item.type]}${item.key}: {`,
         renderAst(item.children, lvl + 2), `${spaces}  }`);
     }
 
