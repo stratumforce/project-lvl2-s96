@@ -32,11 +32,10 @@ const genDiffAst = (firstConfigContent, secondConfigContent) => {
           typeof secondConfigContent[key] === 'undefined' ? {} : secondConfigContent[key]))];
     }
 
+    // if some of objects equal '{}'
     if (!Object.keys(firstConfigContent).length || !Object.keys(secondConfigContent).length) {
-      if (key in firstConfigContent) {
-        return [...acc, buildNode(key, 'same', firstConfigContent[key], '', [])];
-      }
-      return [...acc, buildNode(key, 'same', secondConfigContent[key], '', [])];
+      return [...acc, buildNode(key, 'same', key in firstConfigContent ? firstConfigContent[key] :
+        secondConfigContent[key], '', [])];
     }
 
     const values = (key in firstConfigContent) ?
