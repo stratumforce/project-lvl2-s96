@@ -4,11 +4,11 @@ import compare from '.';
 const program = commander;
 
 program
-  .version('0.0.7')
+  .version('0.0.8')
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format')
-  .action((firstConfig, secondConfig) => compare(firstConfig, secondConfig));
+  .action((firstConfig, secondConfig) => compare(firstConfig, secondConfig, program.format));
 
 export default() => program.parse(process.argv);
 
