@@ -18,7 +18,8 @@ const genDiffAst = (firstConfigContent, secondConfigContent) => {
       const type =
         JSON.stringify(firstConfigContent[key]) === JSON.stringify(secondConfigContent[key]) ?
         'same' : 'changed';
-      return [...acc, buildNode(key, type, firstConfigContent[key], secondConfigContent[key])];
+      return [...acc, buildNode(key, type, firstConfigContent[key],
+          type === 'same' ? '' : secondConfigContent[key])];
     }
 
     const [content, type] = key in firstConfigContent ?
