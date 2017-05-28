@@ -27,14 +27,14 @@ test('Compare two INI files with plain output', () => {
   expect(compare(`${firstConfig}.ini`, `${secondConfig}.ini`, 'plain')).toBe(expectedResult);
 });
 
-test('Compare two JSON files with nested structure', () => {
+test('Compare two JSON files with nested structure with plain output', () => {
   expect(compare(`${firstConfig}.nest.json`, `${secondConfig}.nest.json`, 'plain')).toBe(expectedNestResult);
 });
 
-test('Compare two YML files with nested structure', () => {
+test('Compare two YML files with nested structure with plain output', () => {
   expect(compare(`${firstConfig}.nest.yml`, `${secondConfig}.nest.yml`, 'plain')).toBe(expectedNestResult);
 });
 
-test('Compare two INI files with nested structure', () => {
+test('Compare two INI files with nested structure with plain output', () => {
   expect(compare(`${firstConfig}.nest.ini`, `${secondConfig}.nest.ini`, 'plain')).toBe(expectedNestResult);
 });
