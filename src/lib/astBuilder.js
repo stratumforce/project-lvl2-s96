@@ -25,10 +25,16 @@ const genDiffAst = (firstConfigContent, secondConfigContent) => {
     const [content, type] = key in firstConfigContent ?
       [firstConfigContent, 'removed'] :
       [secondConfigContent, 'added'];
-    const values = content[key] instanceof Object ?
-      [type, '', '', genDiffAst(content[key], content[key])] :
-      [type, ...(type === 'removed' ? [content[key], ''] : ['', content[key]])];
-    return [...acc, buildNode(key, ...values)];
+
+    if (content[key] instanceof Object) {
+      return [...acc, buildNode(key, type, '', '', genDiffAst(content[key], content[key]))];
+    }
+
+    const values = (type === 'removed') ?
+      [content[key], ''] :
+      ['', content[key]];
+
+    return [...acc, buildNode(key, type, ...values)];
   }, []);
 };
 
